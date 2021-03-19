@@ -624,6 +624,51 @@ objects:
                 item_type: Api::Type::String
                 required: true
               - !ruby/object:Api::Type::NestedObject
+                name: 'schema'
+                description: |
+                  The schema for the destination table.
+                  The schema can be omitted if the destination table already exists, or if you're loading data from Google Cloud Datastore.
+                properties:
+                  - !ruby/object:Api::Type::Array
+                    name: 'fields'
+                    description: Describes the fields in a table.
+                    item_type: !ruby/object:Api::Type::NestedObject
+                      properties:
+                        - !ruby/object:Api::Type::String
+                          name: 'description'
+                          description: |
+                            The field description. The maximum length is 1,024
+                            characters.
+                        - !ruby/object:Api::Type::Array
+                          name: 'fields'
+                          description: |
+                            Describes the nested schema fields if the type property is
+                            set to RECORD.
+                          item_type: Api::Type::String
+                        - !ruby/object:Api::Type::Enum
+                          name: 'mode'
+                          description: The field mode
+                          values:
+                            - :NULLABLE
+                            - :REQUIRED
+                            - :REPEATED
+                        - !ruby/object:Api::Type::String
+                          name: 'name'
+                          description: The field name
+                        - !ruby/object:Api::Type::Enum
+                          name: 'type'
+                          description: 'The field data type'
+                          values:
+                            - :STRING
+                            - :BYTES
+                            - :INTEGER
+                            - :FLOAT
+                            - :TIMESTAMP
+                            - :DATE
+                            - :TIME
+                            - :DATETIME
+                            - :RECORD
+              - !ruby/object:Api::Type::NestedObject
                 name: 'destinationTable'
                 description: |
                   The destination table to load the data into.
